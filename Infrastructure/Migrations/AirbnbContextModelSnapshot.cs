@@ -40,7 +40,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Amenities");
+                    b.ToTable("Amenities", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Booking", b =>
@@ -83,7 +83,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Bookings");
+                    b.ToTable("Bookings", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.CalendarAvailability", b =>
@@ -114,7 +114,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("calendarAvailabilities");
+                    b.ToTable("calendarAvailabilities", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Chat.ChatSession", b =>
@@ -164,7 +164,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId", "LastActivityAt");
 
-                    b.ToTable("ChatSessions");
+                    b.ToTable("ChatSessions", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Chat.Message", b =>
@@ -209,7 +209,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("SenderId", "CreatedAt");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Chat.MessageReaction", b =>
@@ -242,7 +242,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("MessageId", "UserId", "ReactionType")
                         .IsUnique();
 
-                    b.ToTable("MessageReactions");
+                    b.ToTable("MessageReactions", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Chat.MessageReadStatus", b =>
@@ -258,7 +258,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("MessageId", "UserId");
 
-                    b.ToTable("MessageReadStatuses");
+                    b.ToTable("MessageReadStatuses", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Chat.ReservationRequest", b =>
@@ -315,7 +315,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ReservationRequests");
+                    b.ToTable("ReservationRequests", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.HostReply", b =>
@@ -347,7 +347,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("HostReply");
+                    b.ToTable("HostReply", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Notification", b =>
@@ -376,7 +376,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Notifications");
+                    b.ToTable("Notifications", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Payment", b =>
@@ -442,7 +442,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Property", b =>
@@ -528,7 +528,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PropertyTypeId");
 
-                    b.ToTable("Properties");
+                    b.ToTable("Properties", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.PropertyAmenity", b =>
@@ -546,7 +546,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("PropertyId", "AmenityId")
                         .IsUnique();
 
-                    b.ToTable("PropertyAmenities");
+                    b.ToTable("PropertyAmenities", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.PropertyImage", b =>
@@ -578,7 +578,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("PropertyImages");
+                    b.ToTable("PropertyImages", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.PropertyType", b =>
@@ -599,7 +599,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("propertyTypes");
+                    b.ToTable("propertyTypes", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.PropertyViolation", b =>
@@ -639,7 +639,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("PropertyViolations");
+                    b.ToTable("PropertyViolations", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Review", b =>
@@ -699,7 +699,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.User", b =>
@@ -842,7 +842,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("UsersOtp");
+                    b.ToTable("UsersOtp", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.Wishlist", b =>
@@ -871,7 +871,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Wishlists");
+                    b.ToTable("Wishlists", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Models.WishlistProperty", b =>
@@ -886,7 +886,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PropertyId");
 
-                    b.ToTable("WishlistProperties");
+                    b.ToTable("WishlistProperties", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -1092,7 +1092,15 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Models.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ChatSession");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("Domain.Models.Chat.MessageReaction", b =>

@@ -20,16 +20,22 @@ namespace Infrastructure.DbConfigs.Chat
                 .HasForeignKey(m => m.ChatSessionId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder
+                .HasOne(m => m.Sender)
+                .WithMany()
+                .HasForeignKey(m => m.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
 
 
-            
+
+
             builder
                 .HasIndex(m => new { m.ChatSessionId, m.CreatedAt });
 
             builder
                 .HasIndex(m => new { m.SenderId, m.CreatedAt });
 
-            
+
         }
     }
 }

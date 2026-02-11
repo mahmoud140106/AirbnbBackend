@@ -16,7 +16,7 @@ namespace Infrastructure.Migrations
                 column: "SenderId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
+                onDelete: ReferentialAction.Restrict);
         }
 
         /// <inheritdoc />

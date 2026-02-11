@@ -66,7 +66,7 @@ namespace Airbnb
             builder.Services.AddInfrastructure(builder.Configuration);
             builder.Services.AddApplication();
             builder.Services.AddPresentation(builder.Configuration);
- 
+
             StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 
             var app = builder.Build();
@@ -83,10 +83,8 @@ namespace Airbnb
 
             app.UseRouting();
 
-            if (app.Environment.IsDevelopment())
-            {
-                app.AddPresentationDevelopmentDI();
-            }
+            // Enable Swagger in all environments to help debug production
+            app.AddPresentationDevelopmentDI();
 
             app.UseMiddleware<JwtFromCookieMiddleware>();
             app.UseMiddleware<TokenValidationMiddleware>();

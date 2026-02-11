@@ -25,7 +25,7 @@ namespace Airbnb.DependencyInjection.PresentationDI
                 options.AddPolicy("AllowAll", policy =>
                 {
                     policy
-                        .SetIsOriginAllowed(_=> true)
+                        .SetIsOriginAllowed(_ => true)
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials();
@@ -33,7 +33,9 @@ namespace Airbnb.DependencyInjection.PresentationDI
 
                 options.AddPolicy("AllowTrusted", policy =>
                 {
+
                     var allowedOrigins = configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
+
 
                     if (allowedOrigins != null && allowedOrigins.Length > 0)
                     {
@@ -52,7 +54,7 @@ namespace Airbnb.DependencyInjection.PresentationDI
                           .AllowAnyHeader()
                           .AllowAnyMethod()
                           .AllowCredentials();
-                              //.WithHeaders("Authorization", "Content-Type", "X-Requested-With");
+                    //.WithHeaders("Authorization", "Content-Type", "X-Requested-With");
                 });
                 options.AddPolicy("AllowAngularApp", policy =>
                 {

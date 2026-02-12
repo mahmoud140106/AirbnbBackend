@@ -83,8 +83,10 @@ namespace Airbnb
 
             app.UseRouting();
 
-            // Enable Swagger in all environments to help debug production
+            // if (app.Environment.IsDevelopment())
+            // {
             app.AddPresentationDevelopmentDI();
+            // }
 
             app.UseMiddleware<JwtFromCookieMiddleware>();
             app.UseMiddleware<TokenValidationMiddleware>();
